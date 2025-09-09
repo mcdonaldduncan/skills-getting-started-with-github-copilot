@@ -20,12 +20,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
+        // Create participants list
+        const participantsList = document.createElement("ul");
+        participantsList.className = "participants-list";
+        details.participants.forEach((participant) => {
+          const li = document.createElement("li");
+          li.textContent = participant;
+          participantsList.appendChild(li);
+        });
+
         activityCard.innerHTML = `
           <h4>${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <div class="participants-section">
+            <strong>Participants:</strong>
+          </div>
         `;
+        activityCard.querySelector(".participants-section").appendChild(participantsList);
 
         activitiesList.appendChild(activityCard);
 
